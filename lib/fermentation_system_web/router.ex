@@ -24,4 +24,8 @@ defmodule FermentationSystemWeb.Router do
       live_dashboard "/dashboard", metrics: FermentationSystemWeb.Telemetry
     end
   end
+
+  scope "/", FermentationSystemWeb do
+    get "ph_data", PhDataController, :index
+  end
 end
