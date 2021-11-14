@@ -1,4 +1,4 @@
-defmodule FermentationSystem.PhData do
+defmodule Database.PhData.Schema do
   @moduledoc """
   Module that contains schema for pH Data.
   """
