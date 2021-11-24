@@ -12,4 +12,8 @@ defmodule FermentationSystemWeb.PhDataController do
     render(conn, "index.json", ph_data: ph_data)
   end
 
+  def set(conn, %{value: value, mac_sensor: mac_sensor}) do
+
+  end
+
 end

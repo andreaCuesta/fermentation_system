@@ -1,28 +1,26 @@
-defmodule FermentationSystem.FermentationProcess do
+defmodule Database.FermentationProcess do
   @moduledoc """
-  Module that contains schema for fermentation process.
+  Module that contains schema for a fermentation process.
   """
 
   use Ecto.Schema
 
   import Ecto.Changeset
 
-  alias FermentationSystem.PhData
-  alias FermentationSystem.User
-  alias FermentationSystem.TemperatureData
+  alias Database.Sensor
+  alias Database.User
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type Ecto.UUID
-  schema "fermentation_process" do
-    field :status, :string
-    has_many(:ph_data, PhData, on_delete: :delete_all)
-    has_many(:temperature_data, TemperatureData, on_delete: :delete_all)
+  schema "fermentation_processes" do
+    field :status, Ecto.Enum, values: [:in_progress, :completed]
+    has_many(:sensor, Sensor, on_delete: :delete_all)
     belongs_to(:user, User, type: :binary_id)
 
     timestamps()
   end
 
-  @fields ~w(status user_id)
+  @fields ~w(status user_id)a
   @spec changeset(fermentation_process :: FermentationProcess.t(), changes :: map()) :: Changeset.t()
   def changeset(fermentation_process, changes) do
     fermentation_process

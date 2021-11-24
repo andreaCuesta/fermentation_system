@@ -1,4 +1,4 @@
-defmodule FermentationSystem.Repo.Migrations.CreateFermentationProcessTable do
+defmodule FermentationSystem.Repo.Migrations.CreateFermentationProcessesTable do
   use Ecto.Migration
 
   def change do
