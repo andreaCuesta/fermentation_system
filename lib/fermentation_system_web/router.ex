@@ -26,7 +26,7 @@ defmodule FermentationSystemWeb.Router do
   end
 
   scope "/", FermentationSystemWeb do
-    get "/ph_data", PhDataController, :index
-    post "/ph_data", PhDataController, :set
+    get "/sensors_data/:type/:fermentation_process_id", SensorsDataController, :index
+    post "/sensors_data", SensorsDataController, :set
   end
 end
