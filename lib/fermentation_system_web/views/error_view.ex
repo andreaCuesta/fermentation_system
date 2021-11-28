@@ -13,4 +13,16 @@ defmodule FermentationSystemWeb.ErrorView do
   def template_not_found(template, _assigns) do
     %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
   end
+
+  @spec render(String.t(), map()) :: map()
+  def render("error.json", %{changeset_errors: changeset}) do
+  errors = Enum.reduce(changeset.errors, "", fn {field, details}, acc -> {reason, _more_details} = details
+                                                                           acc <> "#{Atom.to_string(field)} #{reason}, "
+  end)
+
+    %{
+      status: :failed,
+      errors: errors
+    }
+  end
 end

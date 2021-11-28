@@ -3,6 +3,9 @@ defmodule FermentationSystemWeb.SensorsDataController do
 
   alias Database.SensorsData
 
+  action_fallback FermentationSystemWeb.FallbackController
+
+  @spec index(conn :: Plug.Conn.t(), map()) :: map()
   def index(conn, %{"type" => type, "fermentation_process_id" => fermentation_process_id, "initial_date" => initial_date,
     "final_date" => final_date}) do
     {:ok, start_date} = Date.from_iso8601(initial_date)
@@ -13,8 +16,10 @@ defmodule FermentationSystemWeb.SensorsDataController do
     render(conn, "index.json", sensors_data: data)
   end
 
-  def set(conn, %{value: value, mac_sensor: mac_sensor}) do
-
+  @spec set(conn :: Plug.Conn.t(), params :: map()) :: map()
+  def set(conn, %{"value" => _value, "sensor_mac" => _sensor_mac} = params) do
+    with {:ok, datum} <- SensorsData.insert_datum(params) do
+      render(conn, "insert.json", datum_id: datum.id)
+    end
   end
-
 end
