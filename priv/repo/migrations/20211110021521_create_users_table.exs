@@ -1,4 +1,4 @@
-defmodule FermentationSystem.Repo.Migrations.CreateUserTable do
+defmodule FermentationSystem.Repo.Migrations.CreateUsersTable do
   use Ecto.Migration
 
   def change do

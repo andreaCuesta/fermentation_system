@@ -1,4 +1,4 @@
-defmodule FermentationSystem.User do
+defmodule Database.User do
   @moduledoc """
   Module that contains schema for user.
   """
@@ -7,10 +7,10 @@ defmodule FermentationSystem.User do
 
   import Ecto.Changeset
 
-  alias FermentationSystem.FermentationProcess
+  alias Database.FermentationProcess
 
   @primary_key {:id, :binary_id, autogenerate: true}
-  schema "user" do
+  schema "users" do
     field :email, :string
     has_many(:fermentation_process, FermentationProcess, on_delete: :delete_all)
 

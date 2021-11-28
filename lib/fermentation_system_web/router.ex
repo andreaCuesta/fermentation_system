@@ -24,4 +24,9 @@ defmodule FermentationSystemWeb.Router do
       live_dashboard "/dashboard", metrics: FermentationSystemWeb.Telemetry
     end
   end
+
+  scope "/", FermentationSystemWeb do
+    get "/sensors_data/:type/:fermentation_process_id", SensorsDataController, :index
+    post "/sensor_data", SensorsDataController, :set
+  end
 end
