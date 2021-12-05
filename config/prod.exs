@@ -1,5 +1,11 @@
 use Mix.Config
 
+# Configure your database
+config :fermentation_system, FermentationSystem.Repo,
+       url: System.get_env("DATABASE_URL"),
+       pool_size: String.to_integer(System.get_env("POOL_SIZE" || "5")),
+       ssl: true
+
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
 # when generating URLs.
@@ -10,7 +16,11 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :fermentation_system, FermentationSystemWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  url: [host: System.get_env("HEROKU_HOST"), port: 80],
+  url: [scheme: "https", host: System.get_env("HEROKU_HOST"), port: 443],
+  http: [port: {:system, "PORT"}],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
