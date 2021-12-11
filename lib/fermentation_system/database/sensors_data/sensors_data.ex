@@ -6,8 +6,7 @@ defmodule Database.SensorsData do
 
   alias Ecto.Changeset
   alias FermentationSystem.Repo
-  alias Database.SensorData
-  alias Database.Sensor
+  alias Database.{SensorData, Sensor}
 
   @spec get_specific_type_data(type :: atom()) :: {:ok, list(SensorData.t())}
   def get_specific_type_data(type) do

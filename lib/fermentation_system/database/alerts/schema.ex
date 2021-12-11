@@ -1,6 +1,6 @@
-defmodule Database.Sensor do
+defmodule Database.Alert do
   @moduledoc """
-  Module that contains schema for sensor.
+  Module that contains schema for alert.
   """
 
   use Ecto.Schema
@@ -8,22 +8,21 @@ defmodule Database.Sensor do
   import Ecto.Changeset
 
   alias Database.FermentationProcess
-  alias Database.SensorData
 
-  @primary_key {:mac, :string, autogenerate: false}
+  @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type Ecto.UUID
-  schema "sensors" do
+  schema "alerts" do
     field :type, Ecto.Enum, values: [:ph, :temperature]
-    has_many(:sensor_data, SensorData, on_delete: :delete_all)
+    field :value, :float
     belongs_to(:fermentation_process, FermentationProcess, type: :binary_id)
 
     timestamps()
   end
 
-  @fields ~w(mac type fermentation_process_id)a
-  @spec changeset(sensor :: Sensor.t(), changes :: map()) :: Changeset.t()
-  def changeset(sensor, changes) do
-    sensor
+  @fields ~w(type value fermentation_process_id)a
+  @spec changeset(alert :: Alert.t(), changes :: map()) :: Changeset.t()
+  def changeset(alert, changes) do
+    alert
     |> cast(changes, @fields)
     |> validate_required(@fields)
     |> foreign_key_constraint(:fermentation_process_id)
