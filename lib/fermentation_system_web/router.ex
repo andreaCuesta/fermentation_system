@@ -26,7 +26,11 @@ defmodule FermentationSystemWeb.Router do
   end
 
   scope "/", FermentationSystemWeb do
+    pipe_through :api
+
     get "/sensors_data/:type/:fermentation_process_id", SensorsDataController, :index
     post "/sensor_data", SensorsDataController, :set
+    get "/alerts", AlertsController, :index
+    resources "/alert", AlertsController, only: [:create, :update, :delete]
   end
 end

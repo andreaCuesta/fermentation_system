@@ -10,4 +10,11 @@ defmodule FermentationSystemWeb.FallbackController do
     |> put_view(ErrorView)
     |> render("error.json", changeset_errors: changeset)
   end
+
+  def call(conn, {:error, reason}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(ErrorView)
+    |> render("error.json", reason: reason)
+  end
 end
