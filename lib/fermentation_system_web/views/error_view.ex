@@ -25,4 +25,11 @@ defmodule FermentationSystemWeb.ErrorView do
       errors: errors
     }
   end
+
+  def render("error.json", %{reason: reason}) do
+    %{
+      status: :failed,
+      errors: reason
+    }
+  end
 end
