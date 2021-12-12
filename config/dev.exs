@@ -58,3 +58,6 @@ config :phoenix, :plug_init_mode, :runtime
 
 config :fermentation_system,
        allowed_origins: "http://localhost:3000"
+
+config :fermentation_system, FermentationSystem.Notifications.Mailer,
+       adapter: Bamboo.LocalAdapter

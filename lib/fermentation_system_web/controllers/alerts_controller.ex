@@ -13,7 +13,7 @@ defmodule FermentationSystemWeb.AlertsController do
   end
 
   @spec create(conn :: Plug.Conn.t(), map()) :: map()
-  def create(conn, %{"fermentation_process_id" => fermentation_process_id, "type" => type, "value" => value} = params) do
+  def create(conn, %{"fermentation_process_id" => _fermentation_process_id, "type" => _type, "value" => _value} = params) do
     with {:ok, alert} <- Alerts.insert_alert(params) do
       render(conn, "insert.json", alert_id: alert.id)
     end
