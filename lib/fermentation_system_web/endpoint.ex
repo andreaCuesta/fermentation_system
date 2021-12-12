@@ -48,5 +48,6 @@ defmodule FermentationSystemWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug FermentationSystemWeb.CORS
   plug FermentationSystemWeb.Router
 end

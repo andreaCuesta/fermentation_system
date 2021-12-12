@@ -26,6 +26,14 @@ config :fermentation_system, FermentationSystemWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :bronn, BronnWeb.Mailer,
+       adapter: Bamboo.MailgunAdapter,
+       api_key: "${MAILGUN_API_KEY}",
+       domain: "${MAILGUN_DOMAIN}"
+
+config :fermentation_system,
+       allowed_origins: "${ALLOWED_ORIGIN}"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
