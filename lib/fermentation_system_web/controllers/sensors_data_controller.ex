@@ -1,7 +1,8 @@
 defmodule FermentationSystemWeb.SensorsDataController do
   use FermentationSystemWeb, :controller
 
-  alias Database.SensorsData
+  alias Database.{SensorsData, Sensors}
+  alias Core.Alerts
 
   action_fallback FermentationSystemWeb.FallbackController
 
@@ -17,8 +18,12 @@ defmodule FermentationSystemWeb.SensorsDataController do
   end
 
   @spec set(conn :: Plug.Conn.t(), params :: map()) :: map()
-  def set(conn, %{"value" => _value, "sensor_mac" => _sensor_mac} = params) do
-    with {:ok, datum} <- SensorsData.insert_datum(params) do
+  def set(conn, %{"value" => value, "sensor_mac" => sensor_mac} = params) do
+    {float_value, _rest} = Float.parse(value)
+
+    with {:ok, datum} <- SensorsData.insert_datum(params),
+         {:ok, sensor} <- Sensors.get_sensor_by_mac(sensor_mac),
+         {:ok, _response} <- Alerts.send_alert(float_value, sensor) do
       render(conn, "insert.json", datum_id: datum.id)
     end
   end

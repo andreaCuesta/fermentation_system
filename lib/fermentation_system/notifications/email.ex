@@ -11,7 +11,7 @@ defmodule FermentationSystem.Notifications.Email do
       from: @sender_email,
       subject: "Alerta de pH",
       html_body: "<h3>¡Alerta de pH!</h3>
-                  <p>El proceso de fermentación ha alcanzado el valor <b>#{target_value}</b> en el pH,
+                  <p>El proceso de fermentación ha alcanzado un valor menor o igual a <b>#{target_value}</b> en el pH,
                   se recomienda revisar la curva de pH.</p>
                   <p><a href='#{@dashboard_url}'>Dashboard - Proceso de fermentación</a>",
     )
@@ -31,8 +31,8 @@ defmodule FermentationSystem.Notifications.Email do
 
   @spec temperature_alert_text_body(atom(), target_value :: float()) :: String.t()
   defp temperature_alert_text_body(:higher, target_value), do:
-    "<p>El proceso de fermentación ha alcanzado una temperatura superior a <b>#{target_value} oC</b>, se recomienda revisar el equipo.</p>"
+    "<p>El proceso de fermentación ha alcanzado una temperatura 2oC superior a <b>#{target_value} oC</b>, se recomienda revisar el equipo.</p>"
 
   defp temperature_alert_text_body(:lower, target_value), do:
-    "<p>El proceso de fermentación tiene una temperatura por debajo de <b>#{target_value} oC</b>, se recomienda revisar el equipo.</p>"
+    "<p>El proceso de fermentación tiene una temperatura 2oC por debajo de <b>#{target_value} oC</b>, se recomienda revisar el equipo.</p>"
 end

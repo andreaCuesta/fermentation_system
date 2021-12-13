@@ -4,7 +4,6 @@ defmodule Database.SensorsData do
   """
   import Ecto.Query, warn: false
 
-  alias Ecto.Changeset
   alias FermentationSystem.Repo
   alias Database.{SensorData, Sensor}
 

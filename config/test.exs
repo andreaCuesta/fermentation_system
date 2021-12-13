@@ -18,7 +18,7 @@ config :fermentation_system, FermentationSystemWeb.Endpoint,
   http: [port: 4002],
   server: false
 
-config :fermentation_system, MyApp.Mailer,
+config :fermentation_system, FermentationSystem.Notifications.Mailer,
        adapter: Bamboo.TestAdapter
 
 # Print only warnings and errors during test

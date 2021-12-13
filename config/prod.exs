@@ -26,7 +26,7 @@ config :fermentation_system, FermentationSystemWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :bronn, BronnWeb.Mailer,
+config :fermentation_system, FermentationSystem.Notifications.Mailer,
        adapter: Bamboo.MailgunAdapter,
        api_key: "${MAILGUN_API_KEY}",
        domain: "${MAILGUN_DOMAIN}"
