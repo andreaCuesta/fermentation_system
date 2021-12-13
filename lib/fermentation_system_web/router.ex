@@ -33,4 +33,9 @@ defmodule FermentationSystemWeb.Router do
     get "/alerts", AlertsController, :index
     resources "/alert", AlertsController, only: [:create, :update, :delete]
   end
+
+  if Mix.env() == :dev do
+    # Requires Bamboo.LocalAdapter
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+  end
 end
